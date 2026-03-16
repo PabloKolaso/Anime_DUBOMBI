@@ -6,7 +6,6 @@
  */
 
 const { Router } = require('express');
-const resolver = require('./bridge/resolver');
 
 // ─── Log capture ─────────────────────────────────────────────────────────────
 
@@ -48,34 +47,6 @@ const router = Router();
  */
 router.get('/debug', (req, res) => {
   res.redirect('/dashboard?tab=logs');
-});
-
-/**
- * GET /debug/resolve/:imdbId
- * Forces re-resolution of an IMDB ID and returns JSON with the HiAnime ID + logs.
- */
-router.get('/debug/resolve/:imdbId', async (req, res) => {
-  const { imdbId } = req.params;
-
-  if (!/^tt\d{7,10}$/.test(imdbId)) {
-    return res.json({ imdbId, hianimeId: null, error: 'Invalid IMDB ID format', logs: [] });
-  }
-
-  const logsBefore = logBuffer.length;
-
-  let result = null;
-  let error = null;
-
-  try {
-    resolver.clearCache(imdbId);
-    result = await resolver.resolveImdbToHiAnime(imdbId);
-  } catch (err) {
-    error = err.message;
-  }
-
-  const newLogs = logBuffer.slice(logsBefore);
-
-  res.json({ imdbId, hianimeId: result?.hianimeId || null, title: result?.title || null, method: result?.method || null, error, logs: newLogs });
 });
 
 /**

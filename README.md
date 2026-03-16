@@ -81,19 +81,31 @@ PORT=8000 PUBLIC_URL=https://your-host.com npm start
 | `/manifest.json` | Stremio addon manifest |
 | `/dashboard` | Admin dashboard (overview, analytics, logs) |
 | `/health` | Health check (`{"status":"ok"}`) |
-| `/debug/resolve/:imdbId` | Debug IMDB → HiAnime ID resolution |
 
 ---
 
 ## ⚠️ Legal Disclaimer
 
-This addon does **not** host, store, or distribute any media files.
-All stream links are provided by non-affiliated third parties and are not controlled by this project.
-By using this addon, you accept full responsibility for compliance with the laws and regulations of your jurisdiction.
+This addon does **not** host, store, or distribute any media files. All stream links are provided by non-affiliated third parties and are not controlled by this project.
+
+**Third-party services** — this project uses the following external services and is not affiliated with, endorsed by, or associated with any of them:
+
+| Service | Use |
+|---------|-----|
+| **HiAnime** | Primary anime stream source (via [`aniwatch`](https://github.com/ghoshRitesh12/aniwatch)) |
+| **AnimeKai / Gogoanime** | Fallback stream source (via [`@consumet/extensions`](https://github.com/consumet/consumet.ts)) |
+| **AniList** | Anime metadata and canonical title lookup (GraphQL API, [AniList ToS](https://anilist.co/terms)) |
+| **IMDB** | Title and genre lookup from public HTML pages ([IMDB Conditions of Use](https://www.imdb.com/conditions)) |
+| **Fribb anime-lists** | IMDB ↔ AniList ID mapping dataset ([GitHub](https://github.com/Fribb/anime-lists), MIT) |
+
+Accessing third-party websites through scrapers may be restricted by their Terms of Service. You are solely responsible for ensuring your use of this software complies with the terms of each service and with the laws and regulations of your jurisdiction.
+
+All trademarks, service marks, and trade names referenced here are the property of their respective owners.
+
 The authors of this project bear no liability for how it is used.
 
 ---
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE) for full text.
