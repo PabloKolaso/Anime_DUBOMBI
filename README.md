@@ -143,6 +143,7 @@ If you want to run Anime DUBOMBI on a server so anyone can use it:
 - Make sure port `7001` (or your custom `PORT`) is open in your firewall / security group.
 - Use a reverse proxy (e.g. **nginx**, **Caddy**) to serve it over HTTPS.
 - For always-on hosting consider platforms like **Railway**, **Render**, or **Fly.io**.
+- **Check the Terms of Service** of any hosting platform before deploying — some free-tier or shared platforms prohibit scraping proxies or high-outbound-traffic workloads.
 
 ---
 
