@@ -2,9 +2,15 @@
   <img src="logo/logo.png" alt="Anime DUBOMBI" width="480"/>
 </p>
 
-# Anime DUBOMBI
+<p align="center">
+  <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node.js ≥18"/>
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License"/>
+  <img src="https://img.shields.io/badge/platform-Stremio-7b5ea7" alt="Stremio"/>
+</p>
 
-> English dubbed anime streams for [Stremio](https://www.stremio.com/)
+<h1 align="center">Anime DUBOMBI</h1>
+
+<p align="center"><em>English dubbed anime streams for <a href="https://www.stremio.com/">Stremio</a></em></p>
 
 A self-hosted Stremio addon that finds and serves English dub streams for anime series and movies. Uses HiAnime as the primary source with AnimeKai/Gogoanime as a fallback.
 
@@ -22,38 +28,70 @@ A self-hosted Stremio addon that finds and serves English dub streams for anime 
 
 ---
 
-## Self-Hosting
+## Quick Start
 
-### Requirements
+```bash
+git clone https://github.com/your-username/anime-dubombi.git
+cd anime-dubombi
+npm install && npm start
+```
 
-- Node.js 18+
-- npm
+Then open Stremio and install the addon from `http://localhost:7001/manifest.json`.
 
-### Install & Run
+---
+
+## Installation
+
+### 1. Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) **v18 or higher**
+- **npm** (comes with Node.js)
+- **Git**
+
+Verify your Node.js version:
+
+```bash
+node --version   # should print v18.x.x or higher
+```
+
+---
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/anime-dubombi.git
+cd anime-dubombi
+```
+
+---
+
+### 3. Install Dependencies
 
 ```bash
 npm install
-npm start
 ```
 
-The addon will be available at `http://localhost:7001/manifest.json`.
+---
 
-For development with auto-reload:
+### 4. Configure Environment *(optional)*
 
-```bash
-npm run dev
-```
+By default the addon runs on port `7001`. You only need to set environment variables if you want to change the port or host it remotely.
 
-### Environment Variables
+| Variable     | Default                   | Description                                           |
+|--------------|---------------------------|-------------------------------------------------------|
+| `PORT`       | `7001`                    | HTTP port to listen on                                |
+| `PUBLIC_URL` | `http://localhost:<PORT>` | Your public URL — required for remote hosting and enables the 12-min keep-alive ping |
 
-| Variable     | Default                        | Description                              |
-|--------------|--------------------------------|------------------------------------------|
-| `PORT`       | `7001`                         | HTTP port to listen on                   |
-| `PUBLIC_URL` | `http://localhost:<PORT>`      | External URL (enables 12-min keep-alive) |
-
-**Windows:**
+**Windows (Command Prompt):**
 ```cmd
 set PORT=8000 && set PUBLIC_URL=https://your-host.com && npm start
+```
+
+**Windows (PowerShell):**
+```powershell
+$env:PORT="8000"; $env:PUBLIC_URL="https://your-host.com"; npm start
 ```
 
 **Linux / macOS:**
@@ -63,28 +101,63 @@ PORT=8000 PUBLIC_URL=https://your-host.com npm start
 
 ---
 
-## Install in Stremio
+### 5. Start the Server
 
-1. Start the addon server (`npm start`)
-2. Open Stremio → Settings → Add-ons → Install Add-on
-3. Paste: `http://localhost:7001/manifest.json`
+```bash
+npm start
+```
+
+The addon will be available at:
+
+```
+http://localhost:7001/manifest.json
+```
+
+For development with **auto-reload** on file changes:
+
+```bash
+npm run dev
+```
+
+---
+
+### 6. Add the Addon to Stremio
+
+1. Open **Stremio**
+2. Go to **Settings** → **Add-ons** → **Install Add-on**
+3. Paste the manifest URL:
+   ```
+   http://localhost:7001/manifest.json
+   ```
 4. Click **Install**
 
-> If hosting remotely, replace `localhost:7001` with your `PUBLIC_URL`.
+> **Remote hosting?** Replace `http://localhost:7001` with your `PUBLIC_URL` (e.g. `https://your-host.com/manifest.json`).
+
+---
+
+## Remote Hosting Tips
+
+If you want to run Anime DUBOMBI on a server so anyone can use it:
+
+- Set `PUBLIC_URL` to your server's public address — this activates the keep-alive ping that prevents the process from being killed on free-tier hosts.
+- Make sure port `7001` (or your custom `PORT`) is open in your firewall / security group.
+- Use a reverse proxy (e.g. **nginx**, **Caddy**) to serve it over HTTPS.
+- For always-on hosting consider platforms like **Railway**, **Render**, or **Fly.io**.
 
 ---
 
 ## Endpoints
 
-| Path | Description |
-|------|-------------|
-| `/manifest.json` | Stremio addon manifest |
-| `/dashboard` | Admin dashboard (overview, analytics, logs) |
-| `/health` | Health check (`{"status":"ok"}`) |
+| Path              | Description                                  |
+|-------------------|----------------------------------------------|
+| `/manifest.json`  | Stremio addon manifest                       |
+| `/dashboard`      | Admin dashboard (overview, analytics, logs)  |
+| `/health`         | Health check — returns `{"status":"ok"}`     |
 
 ---
 
-## ⚠️ Legal Disclaimer
+<details>
+<summary>⚠️ Legal Disclaimer</summary>
 
 This addon does **not** host, store, or distribute any media files. All stream links are provided by non-affiliated third parties and are not controlled by this project.
 
@@ -103,6 +176,8 @@ Accessing third-party websites through scrapers may be restricted by their Terms
 All trademarks, service marks, and trade names referenced here are the property of their respective owners.
 
 The authors of this project bear no liability for how it is used.
+
+</details>
 
 ---
 
